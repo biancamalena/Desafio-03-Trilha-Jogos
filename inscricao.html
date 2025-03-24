@@ -173,21 +173,51 @@
                    <span class="trilha__opcao">Programação de Jogos</span>
                    </label>
 
-                   <label class="trilha">
-                      <input type="radio" name="trilha" value="design">
-                      <img class="icones__trilha" src="assets/ux.png">
-                      <span class="trilha__opcao">Design e Experiência</span>
-                  </label>
+                    <label class="trilha">
+                        <input type="radio" name="trilha" value="design">
+                        <img class="icones__trilha" src="assets/ux.png">
+                        <span class="trilha__opcao">Design e Experiência</span>
+                    </label>
 
-                  <label class="trilha">
-                      <input type="radio" name="trilha" value="dados">
-                      <img class="icones__trilha" src="assets/dados.png">
-                      <span class="trilha__opcao">Ciência de Dados</span>
-                  </label>
+                    <label class="trilha">
+                        <input type="radio" name="trilha" value="dados">
+                        <img class="icones__trilha" src="assets/dados.png">
+                        <span class="trilha__opcao">Ciência de Dados</span>
+                    </label>
                       <span class="mensagem__erro" id="trilha__erro"></span>
                 </div>
               </section>
-                
+
+              <section class="id__senha">
+                <div class="id>"
+                    <label for="username">
+                        Nome de Usuário (ID) 
+                        <input type="text" id="username" name="username" required>
+                        <span class="mensagem__erro" id="username__erro"></span>
+                    </label>
+                    <div id="usernameError" class="error"></div>
+                </div>
+
+                <div class="senha">
+                    <label for="senha">
+                        Senha
+                        <input type="password" id="senha" name="senha" required minlength="6">
+                        <span class="mensagem__erro" id="senha__erro"></span>
+                    </label>
+                    <div id="senhaError" class="error"></div>
+                </div>
+
+                <div class="senha__confirmação">
+                    <label for="confirmar_senha">
+                        Confirmar Senha
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+                    <span class="mensagem__erro" id="confirmar_senha__erro"></span>
+                    </label>
+                    <div id="confirmarError" class="error"></div>
+                </div>
+
+              </section>
+            
                 <div class="termos__condicoes">
                     <label class="checkbox">
                         <input type="checkbox" id="declaro" required>
