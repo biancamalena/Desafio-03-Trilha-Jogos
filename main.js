@@ -30,6 +30,39 @@ function formatarCEP(campo) {
     campo.value = cep.substring(0, 9);
 }
 
+function validarUsername (username) {
+    if (!username || username.trim().length ===0) {
+        return { valido: false, mensagem: 'Nome de usuário é obrigatório'};
+    }
+    if (username.length < 4) {
+        return { valido: false, mensagem: 'Nome de usuário deve ter pelo menos 4 caracteres'};
+    }
+    if (!/^[a-zA-Z0-9_]+$/.test(username)){
+        return { valido: false, mensagem: 'Use apenas letras e números'};
+    }
+    return {valido:true};
+}
+
+function validarSenha(senha) {
+    if (!senha || senha.length ===0) {
+        return { valido: false, mensagem: 'Senha é obrigatória'};    
+    }
+    if (senha.length < 6) {
+        return { valido: false, mensagem: 'A senha deve ter pelo menos 6 caracteres'};
+    }
+    return {valido: true};
+}
+
+function validarConfirmacaoSenha (senha, confirmacao) {
+    if (!confirmacao || confirmacao.length ===0) {
+        return{valido:false, mensagem: 'Confirme sua senha'};
+    }
+    if (senha !== confirmacao) {
+        return {valido: false, mensagem: 'As senhas não coincidem'};
+    }
+    return { valido: true};
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.form');
     const mensagemConfirmacao = document.getElementById('mensagemConfirmacao');
@@ -100,6 +133,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'comprovante':
                     validarArquivo(campo, erroId);
                     break;
+                case 'username':
+                    const usernameValido = validarUsername (campo.value.trim());
+                    if (!usernameValido.valido) {
+                        erroElement.textContent = usernameValido.mensagem;
+                        erroElement.style.display = 'block';
+                        campo.classList.add('invalido');
+                    } else {
+                        erroElement.style.display = 'none';
+                        campo.classList.remove ('invalido');
+                    }
+                    break;
+                case 'senha':
+                    const senhaValida = validarSenha(campo.value);
+                    if (!senhaValida.valido) {
+                        erroElement.textContent = senhaValida.mensagem;
+                        erroElement.style.display = 'block';
+                        campo.classList.add('invalido');
+                    } else {
+                        erroElement.style.display = 'none';
+                        campo.classList.remove('invalido');
+                        if (document.getElementById ('confirmar_senha').value) {
+                            document.getElementById('confirmar_senha').dispatchEvent (new Event ('input'));
+                        }
+                    }
+                    break;
+                case 'confirmar_senha':
+                    const confirmacaoValida = validarConfirmacaoSenha(
+                        document.getElementById ('senha').value,
+                        campo.value
+                    );
+                    if (!confirmacaoValida.valido) {
+                        erroElement.textContent = confirmacaoValida.mensagem;
+                        erroElement.style.display = 'block';
+                        campo.classList.add('invalido');
+                    } else {
+                        erroElement.style.display = 'none';
+                        campo.classList.remove('invalido');
+                    }
+                    break;
             }
         });
     });
@@ -122,13 +194,25 @@ document.addEventListener('DOMContentLoaded', () => {
             rua: [/^[A-Za-zÀ-ÿ\s']{3,}$/, 'Rua inválida'],
             numero: [/^\d+$/, 'Número inválido'],
             cidade: [/^[A-Za-zÀ-ÿ\s']{3,}$/, 'Cidade inválida'],
-            estado: [/^[A-Za-zÀ-ÿ\s']{3,}$/, 'Estado inválido']
+            estado: [/^[A-Za-zÀ-ÿ\s']{3,}$/, 'Estado inválido'],
+            username: [/^[a-zA-Z0-9_]{4,}$/, 'Nome de usuário inválido'],
+            senha: [/^.{6,}$/, 'Senha inválida']
         };
 
         Object.entries(camposObrigatorios).forEach(([id, [regex, mensagem]]) => {
             const campo = document.getElementById(id);
             if (!validarCampo(campo, regex, `${id}__erro`, mensagem)) formValido = false;
         });
+
+        const senha = document.getElementById ('senha').value;
+        const confirmacao = document.getElementById ('confirmar_senha').value;
+        const confirmacaoValida = validarConfirmacaoSenha (senha, confirmacao);
+        if (!confirmacaoValida.valido) {
+            document.getElementById('confirmar_senha__erro').textContent = confirmacaoValida.mensagem;
+            document.getElementById('confirmar_senha__erro').style.display = 'block';
+            document.getElementById('confirmar_senha').classList.add('invalido');
+            formValido = false;
+        }
 
         if (!document.querySelector('input[name="trilha"]:checked')) {
             document.getElementById('trilha__erro').style.display = 'block';
