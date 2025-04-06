@@ -13,13 +13,42 @@
     <title>Trilhas - Login</title>
 
 <body>
-    <div class="login-box">
-        <h1>Login</h1>
-        <form>
-            <input type="email" placeholder="E-mail" required>
-            <input type="password" placeholder="senha" required>
-            <input type="submit" value="Entrar">
-        </form>
-        <a href="#">Ainda não possui o cadastro ?</a>
-    </div>
+
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+            <button>
+                <a href="index.html" class="btn_cabecalho"><span class="spn">Inicío</span></a>
+                <a href="inscricao.html" class="btn_cabecalho"><span class="spn">Inscrição</span></a>
+                <a href="login.html" class="btn_cabecalho"><span class="spn">Login</span></a>
+                <a href="#" class="btn_cabecalho"><span class="spn">Edital</span></a>
+                <a href="#" class="btn_cabecalho"><span class="spn">Ajuda</span></a>
+            </button>
+        </nav>
+    </header>
+
+    <main class="main__login">
+        <div class="login__box">
+            <div class="form__login">
+                <p class="title__login"> Login </p>
+                <form action="">
+                    <div class="form-group"> 
+                        <label class="subtitle__login" for="email">Email ou ID</label>
+                        <input type="email" id="login" class="form__style" placeholder="Entre com o seu email ou ID" required>
+                    </div>
+                    
+                    <div class="form-group"> 
+                        <label class="subtitle__login" for="password">Senha</label>
+                        <input type="password" id="senha" class="form__style" placeholder="Digite sua senha" required>
+                    </div>
+                        <button class="btn__login">Fazer login</button>
+                        <p>Ainda não tem uma conta? <a class="link__login" href="inscricao.html">Inscreva-se aqui!</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="rodape">
+        <img class="rodape__logo" src="assets/logo-inova.avif" alt="Logo do INOVA Maranhão">
+        <img class="rodape__logo" src="assets/Logo_MA_SECTI_FAPEMA_branca.png" alt="Logos do Governo do Maranhão e da FAPEMA">
+    </footer>
 </body>
