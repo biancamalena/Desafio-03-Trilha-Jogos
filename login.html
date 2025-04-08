@@ -10,19 +10,18 @@
     <link rel="stylesheet" href="./styles/layout.css">
     <link rel="stylesheet" href="./styles/pages.css">
     <link rel="stylesheet" href="./styles/responsive.css">
-    <title>Trilhas - Login</title>
+    <title>Trilhas | Login</title>
+</head>
 
 <body>
 
     <header class="cabecalho">
         <nav class="cabecalho__menu">
-            <button>
-                <a href="index.html" class="btn_cabecalho"><span class="spn">Inicío</span></a>
+                <a href="index.html" class="btn_cabecalho"><span class="spn">Início</span></a>
                 <a href="inscricao.html" class="btn_cabecalho"><span class="spn">Inscrição</span></a>
                 <a href="login.html" class="btn_cabecalho"><span class="spn">Login</span></a>
                 <a href="#" class="btn_cabecalho"><span class="spn">Edital</span></a>
-                <a href="#" class="btn_cabecalho"><span class="spn">Ajuda</span></a>
-            </button>
+                <a href="feedback.html" class="btn_cabecalho"><span class="spn">Ajuda</span></a>
         </nav>
     </header>
 
@@ -30,17 +29,21 @@
         <div class="login__box">
             <div class="form__login">
                 <p class="title__login"> Login </p>
-                <form action="">
+                <form method="post">
                     <div class="form-group"> 
                         <label class="subtitle__login" for="email">Email ou ID</label>
-                        <input type="email" id="login" class="form__style" placeholder="Entre com o seu email ou ID" required>
+                        <input type="text" id="login" class="form__style" placeholder="Entre com o seu email ou ID" required>
+                        <span class="mensagem__erro" id="login__erro"></span>
                     </div>
                     
-                    <div class="form-group"> 
+                    <div class="form-group senha-wrapper">
                         <label class="subtitle__login" for="password">Senha</label>
-                        <input type="password" id="senha" class="form__style" placeholder="Digite sua senha" required>
+                        <div class="input-icon-wrapper">
+                            <input type="password" id="senha" class="form__style" placeholder="Digite sua senha" required>
+                            <span id="toggleSenha" class="toggle-senha" aria-label="Mostrar/ocultar senha">👁️</span>
+                        </div>
                     </div>
-                        <button class="btn__login">Fazer login</button>
+                        <button type="submit" class="btn__login">Fazer login</button>
                         <p>Ainda não tem uma conta? <a class="link__login" href="inscricao.html">Inscreva-se aqui!</a></p>
                     </div>
                 </form>
@@ -51,4 +54,7 @@
         <img class="rodape__logo" src="assets/logo-inova.avif" alt="Logo do INOVA Maranhão">
         <img class="rodape__logo" src="assets/Logo_MA_SECTI_FAPEMA_branca.png" alt="Logos do Governo do Maranhão e da FAPEMA">
     </footer>
+
+    <script src="js/login.js"></script>
 </body>
+</html>
