@@ -2,25 +2,122 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/reset.css">
-    <link rel="stylesheet" href="./styles/components.css">
-    <link rel="stylesheet" href="./styles/layout.css">
-    <link rel="stylesheet" href="./styles/pages.css">
-    <link rel="stylesheet" href="./styles/responsive.css">
-    <title>Trilhas - Feedback</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles/reset.css" />
+  <link rel="stylesheet" href="./styles/components.css" />
+  <link rel="stylesheet" href="./styles/layout.css" />
+  <link rel="stylesheet" href="./styles/pages.css" />
+  <link rel="stylesheet" href="./styles/responsive.css" />
+  <title>Trilhas | Ajuda e Feedback</title>
 </head>
 
 <body>
-    <div class="form-feedback">
-        <h1>Nos dê o seu feedback!</h1>
-        <form>
-            <input type="text" placeholder="Nome" required>
-            <input type="email" placeholder="Email" required>
-            <input type="text" placeholder="Nos dê a sua opinião!">
-            <input type="submit" value="Entrar">
-        </form>
+  <header class="cabecalho">
+    <nav class="cabecalho__menu">
+      <a href="index.html" class="btn_cabecalho"><span class="spn">Início</span></a>
+      <a href="inscricao.html" class="btn_cabecalho"><span class="spn">Inscrição</span></a>
+      <a href="login.html" class="btn_cabecalho"><span class="spn">Login</span></a>
+      <a href="edital.html" class="btn_cabecalho"><span class="spn">Edital</span></a>
+      <a href="feedback.html" class="btn_cabecalho"><span class="spn">Ajuda</span></a>
+    </nav>
+  </header>
+
+  <main class="ajuda__feedback">
+    <div class="box__ajuda" id="box-ajuda">
+      <h3>Como podemos te ajudar hoje?</h3>
+
+      <div class="opcoes_ajuda_feedback">
+        <button type="button" class="ajuda_feedback_btn help__btn" onclick="openForm('help-form')">
+          <span class="animation_btn"></span>
+          Precisa de ajuda? Aperte aqui!
+        </button>
+
+        <button type="button" class="ajuda_feedback_btn feedback__btn" onclick="openForm('feedback-form')">
+          <span class="animation_btn"></span>
+          Nos dê seu feedback! Aperte aqui!
+        </button>
+      </div>
     </div>
+
+    <div id="help-form" class="form__padrao">
+      <button type="button" class="voltar-botao" onclick="goBack()">
+        <span class="seta">←</span> Voltar
+      </button>
+      <h2>Formulário de Ajuda</h2>
+      <form id="helpForm">
+        <div class="form-group">
+          <label class="label_ajuda_feedback" for="name">Seu Nome:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="group_ajuda_feedback">
+          <label class="label_ajuda_feedback" for="email">Seu Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="group_ajuda_feedback">
+          <label class="label_ajuda_feedback" for="issue-type">Tipo de Problema:</label>
+          <select id="issue-type" name="issue-type">
+            <option value="technical">Problema Técnico</option>
+            <option value="account">Problema com Conta</option>
+            <option value="payment">Problema com Formulário</option>
+            <option value="other">Outro</option>
+          </select>
+        </div>
+
+        <div class="group_ajuda_feedback">
+          <label class="label_ajuda_feedback" for="description">Descreva seu problema:</label>
+          <textarea id="description" name="description" required></textarea>
+        </div>
+
+        <button type="submit" class="submit_btn">Enviar Pedido de Ajuda</button>
+      </form>
+    </div>
+
+    <div id="feedback-form" class="form__padrao">
+      <button type="button" class="voltar-botao" onclick="goBack()">
+        <span class="seta">←</span> Voltar
+      </button>
+      <h2>Formulário de Feedback</h2>
+      <form id="feedbackForm">
+        <div class="group_ajuda_feedback">
+          <label class="label_ajuda_feedback" for="feedback-name">Seu Nome (opcional):</label>
+          <input type="text" id="feedback-name" name="feedback-name" />
+        </div>
+
+        <div class="group_ajuda_feedback">
+          <label class="label_ajuda_feedback" for="feedback-email">Seu Email (opcional):</label>
+          <input type="email" id="feedback-email" name="feedback-email" />
+        </div>
+
+        <div class="group_ajuda_feedback">
+          <label for="feedback-type">Tipo de Feedback:</label>
+          <select id="feedback-type" name="feedback-type">
+            <option value="suggestion">Sugestão</option>
+            <option value="compliment">Elogio</option>
+            <option value="criticism">Crítica</option>
+            <option value="other">Outro</option>
+          </select>
+        </div>
+
+        <div class="group_ajuda_feedback">
+          <label class="label_ajuda_feedback" for="feedback-message">Seu Feedback:</label>
+          <textarea id="feedback-message" name="feedback-message" required></textarea>
+        </div>
+
+        <button type="submit" class="submit_btn">Enviar Feedback</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <img class="rodape__logo" src="assets/logo-inova.avif" alt="Logo do INOVA Maranhão" />
+    <img class="rodape__logo" src="assets/Logo_MA_SECTI_FAPEMA_branca.png" alt="Logos do Governo do Maranhão e da FAPEMA" />
+  </footer>
+
+  <script src="js/feedback.js"></script>
 </body>
+
+</html>
