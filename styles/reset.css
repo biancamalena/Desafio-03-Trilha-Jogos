@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     margin: 0;
@@ -10,40 +10,52 @@
     --cor-secundaria: #023859;
     --cor-terciaria: #364C59;
     --cor-destaque: #FFFFFF1A;
+    --cor-shadow: #000000;
     --cor-box-shadow: #0000001A;
-    --cor-hover: #007bff;
+    --cor-hover: #3498db;
   
     --text-primaria: #292524;
-    --text-secundaria: #57534E;
+    --text-secundaria: #2c3e50;
     --text-terciaria: #ffffff;
+    --text-shadow: #666;
     --text-destaque: #E43A12;
   
     --superficie-primaria: #FFFFFF;
     --superficie-secundaria: #FEE7D6;
+    --superficie-terciaria: #4e89c7;
     --superficie-inativa: #E7E5E4;
   
     --tracado: #D6D3D1;
-    --tracado-destaque: #F3541C;
+    --tracado-destaque: #e74c3c; 
   
     --semantica-erro: #DC2626;
 
     --font-primaria: 'Poppins', sans-serif;
-    --font-secundaria: 'Ubuntu', sans-serif;
+    --font-secundaria: 'Lato Static', sans-serif;
 
     --font-size-heading1: 2rem;
     --font-size-heading2: 1.5rem;
     --font-size-heading3: 1.25rem;
     --font-size-heading4: 1rem;
     --font-size-heading5: 0.875rem;
+    --font-size-heading6: o.780rem;
   
     --line-height: 1.2;
 }
 
 html {
     scroll-behavior: smooth;
-  }
+    box-sizing: border-box;
+}
+  
+*, *:before, *:after {
+    box-sizing: inherit;
+}
 
 body{
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(to right, var(--cor-terciaria), var(--cor-secundaria), var(--cor-primaria));
 }
