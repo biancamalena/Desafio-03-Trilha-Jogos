@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleIcon.addEventListener("click", () => {
       const tipo = senhaInput.type === "password" ? "text" : "password";
       senhaInput.type = tipo;
-      toggleIcon.textContent = tipo === "password" ? "👁️" : "🙈";
+      toggleIcon.textContent = tipo === "password" ? "🙈" : "👁️";
     });
   
     form.addEventListener("submit", (e) => {
