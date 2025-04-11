@@ -4,70 +4,52 @@ function filtrarSomenteNumeros(campo) {
 
 function validarDigitosCPF(cpf) {
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-    
     let soma = 0;
+
     for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
     let resto = (soma * 10) % 11;
     if (resto === 10 || resto === 11) resto = 0;
     if (resto !== parseInt(cpf.charAt(9))) return false;
-    
+
     soma = 0;
     for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
     resto = (soma * 10) % 11;
     if (resto === 10 || resto === 11) resto = 0;
-    
+
     return resto === parseInt(cpf.charAt(10));
 }
 
 function formatarCPF(campo) {
-    let cpf = campo.value.replace(/\D/g, '');
-    if (cpf.length > 11) cpf = cpf.substring(0, 11);
-    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
-    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
-    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    let cpf = campo.value.replace(/\D/g, '').substring(0, 11);
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2')
+             .replace(/(\d{3})(\d)/, '$1.$2')
+             .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
     campo.value = cpf;
 }
 
 function formatarTelefone(campo) {
-    let numero = campo.value.replace(/\D/g, '');
-    if (numero.length > 11) numero = numero.substring(0, 11);
+    let numero = campo.value.replace(/\D/g, '').substring(0, 11);
     if (numero.length > 0) {
         numero = numero.replace(/^(\d{2})(\d)/, '($1) $2');
-        numero = numero.length > 10 ? 
-            numero.replace(/(\d{5})(\d)/, '$1-$2') : 
+        numero = numero.length > 10 ?
+            numero.replace(/(\d{5})(\d)/, '$1-$2') :
             numero.replace(/(\d{4})(\d)/, '$1-$2');
     }
     campo.value = numero;
 }
 
 function formatarCEP(campo) {
-    let cep = campo.value.replace(/\D/g, '');
-    if (cep.length > 8) cep = cep.substring(0, 8);
+    let cep = campo.value.replace(/\D/g, '').substring(0, 8);
     if (cep.length > 5) cep = cep.replace(/^(\d{5})(\d)/, '$1-$2');
     campo.value = cep;
     return cep;
-}
-
-function validarDataNascimento(data) {
-    const regex = /^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
-    if (!regex.test(data)) return false;
-    
-    const [ano, mes, dia] = data.split('-').map(Number);
-    const dataObj = new Date(ano, mes - 1, dia);
-    const hoje = new Date();
-    const idade = hoje.getFullYear() - ano;
-    
-    return dataObj.getDate() === dia && 
-           dataObj.getMonth() === mes - 1 && 
-           dataObj.getFullYear() === ano &&
-           idade >= 18;
 }
 
 async function buscarEnderecoPorCEP(cep) {
     try {
         cep = cep.replace(/\D/g, '');
         const cepErro = document.getElementById('cep-erro');
-        
+
         if (cep.length !== 8) {
             if (cepErro) cepErro.textContent = 'CEP deve ter 8 dígitos';
             return false;
@@ -81,14 +63,10 @@ async function buscarEnderecoPorCEP(cep) {
             if (cepErro) cepErro.textContent = 'CEP não encontrado';
             return false;
         }
-        
-        const rua = document.getElementById('rua');
-        const cidade = document.getElementById('cidade');
-        const estado = document.getElementById('estado');
-        if (rua) rua.value = data.logradouro || '';
-        if (cidade) cidade.value = data.localidade || '';
-        if (estado) estado.value = data.uf || '';
-        
+
+        document.getElementById('rua').value = data.logradouro || '';
+        document.getElementById('cidade').value = data.localidade || '';
+        document.getElementById('estado').value = data.uf || '';
         if (cepErro) cepErro.textContent = '';
         return true;
     } catch (error) {
@@ -104,7 +82,7 @@ function validarUsername(username) {
         return { valido: false, mensagem: 'Nome de usuário é obrigatório' };
     }
     if (username.length < 4) {
-        return { valido: false, mensagem: 'Nome de usuário deve ter pelo menos 4 caracteres' };
+        return { valido: false, mensagem: 'Mínimo de 4 caracteres' };
     }
     if (!/^[a-zA-Z0-9_.]+$/.test(username)) {
         return { valido: false, mensagem: 'Use apenas letras, números, pontos e underline' };
@@ -121,19 +99,18 @@ function validarSenha(senha) {
     if (!/\d/.test(senha)) erros.push('um número');
     if (!/[\W_]/.test(senha)) erros.push('um caractere especial');
 
-    return erros.length > 0 ? {
-        valido: false,
-        mensagem: `A senha deve conter: ${erros.join(', ')}.`
-    } : { valido: true };
+    return erros.length > 0
+        ? { valido: false, mensagem: `A senha deve conter: ${erros.join(', ')}.` }
+        : { valido: true };
 }
 
 function validarConfirmacaoSenha(senha, confirmacao) {
     if (!confirmacao || confirmacao.length === 0) {
         return { valido: false, mensagem: 'Confirme sua senha' };
     }
-    return senha !== confirmacao ? 
-        { valido: false, mensagem: 'As senhas não coincidem' } : 
-        { valido: true };
+    return senha !== confirmacao
+        ? { valido: false, mensagem: 'As senhas não coincidem' }
+        : { valido: true };
 }
 
 function debounce(func, timeout = 500) {
@@ -145,37 +122,19 @@ function debounce(func, timeout = 500) {
 }
 
 function validarCampo(campo, regex, erroId, mensagemErro) {
-    if (!campo || !document.getElementById(erroId)) return false;
-    
     const erroElement = document.getElementById(erroId);
     const valido = regex.test(campo.value.trim());
-    
     campo.classList.toggle('invalido', !valido);
-    erroElement.textContent = !valido ? mensagemErro : '';
-    erroElement.style.display = !valido ? 'block' : 'none';
-    
-    return valido;
-}
-
-function validarArquivo(campo, erroId) {
-    if (!campo) return false;
-    
-    const erroElement = document.getElementById(erroId);
-    const documentBox = campo.closest('.document__box');
-    const valido = campo.files && campo.files.length > 0;
-    
     if (erroElement) {
-        erroElement.textContent = !valido ? 'Documento obrigatório' : '';
+        erroElement.textContent = !valido ? mensagemErro : '';
         erroElement.style.display = !valido ? 'block' : 'none';
     }
-    if (documentBox) documentBox.classList.toggle('invalido', !valido);
-    
     return valido;
 }
 
 function configurarMascaras() {
     document.querySelectorAll('input[type="file"]').forEach(campo => {
-        campo.addEventListener('change', function() {
+        campo.addEventListener('change', function () {
             const spanNome = this.parentElement.querySelector('.nome__arquivo');
             if (this.files?.[0] && spanNome) {
                 spanNome.textContent = this.files[0].name;
@@ -189,16 +148,9 @@ function configurarMascaras() {
     document.getElementById('buscarCepBtn')?.addEventListener('click', debounce(async () => {
         const buscarBtn = document.getElementById('buscarCepBtn');
         const originalBtnContent = buscarBtn.innerHTML;
-        
-        buscarBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10" stroke-dasharray="15.7 15.7">
-                    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
-                </circle>
-            </svg>
-        `;
+        buscarBtn.innerHTML = `<span class="spinner"></span>`;
         buscarBtn.disabled = true;
-        
+
         try {
             const cepCampo = document.getElementById('cep');
             const resultado = await buscarEnderecoPorCEP(cepCampo.value);
@@ -211,69 +163,92 @@ function configurarMascaras() {
 }
 
 function configurarValidacaoEmTempoReal() {
-    const camposValidacao = {
-        'nome': { regex: /^[A-Za-zÀ-ÿ\s']{3,}$/, mensagem: 'Nome completo inválido' },
-        'cpf': { formatar: formatarCPF, validar: (v) => v.replace(/\D/g, '').length === 11 && validarDigitosCPF(v.replace(/\D/g, '')) },
-        'email': { regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, mensagem: 'E-mail inválido' },
-        'telefone': { formatar: formatarTelefone, regex: /^\(\d{2}\) \d{4,5}-\d{4}$/, mensagem: 'Telefone inválido' },
-        'cep': { formatar: formatarCEP, regex: /^\d{5}-\d{3}$/, mensagem: 'CEP inválido', erroId: 'cep-erro' },
-        'numero': { regex: /^\d+$/, mensagem: 'Apenas números permitidos' },
-        'estado': { regex: /^(?:[A-Za-zÀ-ÿ]{2}|[A-Za-zÀ-ÿ\s']{3,})$/, mensagem: 'Estado inválido' },
-        'username': { validar: (v) => validarUsername(v.trim()) },
-        'senha': { validar: (v) => validarSenha(v) },
-        'confirmar_senha': { validar: (v) => validarConfirmacaoSenha(document.getElementById('senha')?.value, v) }
+    const campos = {
+        nome: { regex: /^[A-Za-zÀ-ÿ\s']{3,}$/, mensagem: 'Nome inválido' },
+        cpf: {
+            formatar: formatarCPF,
+            validar: (v) => ({
+                valido: validarDigitosCPF(v.replace(/\D/g, '')),
+                mensagem: 'CPF inválido'
+            })
+        },
+        email: { regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, mensagem: 'E-mail inválido' },
+        telefone: {
+            formatar: formatarTelefone,
+            regex: /^\(\d{2}\) \d{4,5}-\d{4}$/,
+            mensagem: 'Telefone inválido'
+        },
+        cep: {
+            formatar: formatarCEP,
+            regex: /^\d{5}-\d{3}$/,
+            mensagem: 'CEP inválido',
+            erroId: 'cep-erro'
+        },
+        numero: { regex: /^\d+$/, mensagem: 'Número inválido' },
+        username: { validar: validarUsername },
+        senha: { validar: validarSenha },
+        confirmar_senha: {
+            validar: (v) => validarConfirmacaoSenha(document.getElementById('senha')?.value, v)
+        }
     };
 
     document.addEventListener('input', (e) => {
         const campo = e.target;
-        const config = camposValidacao[campo.id];
+        const config = campos[campo.id];
         if (!config) return;
 
         if (config.formatar) config.formatar(campo);
-        
+
         if (config.regex) {
             validarCampo(campo, config.regex, config.erroId || `${campo.id}__erro`, config.mensagem);
         } else if (config.validar) {
             const resultado = config.validar(campo.value);
             const erroElement = document.getElementById(config.erroId || `${campo.id}__erro`);
-            
+            campo.classList.toggle('invalido', !resultado.valido);
             if (erroElement) {
                 erroElement.textContent = resultado.valido ? '' : resultado.mensagem;
                 erroElement.style.display = resultado.valido ? 'none' : 'block';
             }
-            campo.classList.toggle('invalido', !resultado.valido);
         }
     });
 }
 
 function validarFormularioCompleto() {
     let formValido = true;
-    
-    const camposObrigatorios = [
-        { id: 'nome', regex: /^[A-Za-zÀ-ÿ\s']{3,}$/, mensagem: 'Nome completo inválido' },
-        { id: 'data_nascimento', validar: validarDataNascimento, mensagem: 'Data inválida ou menor de 18 anos' },
-        { id: 'cpf', regex: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, mensagem: 'CPF inválido' },
+
+    const campos = [
+        { id: 'nome', regex: /^[A-Za-zÀ-ÿ\s']{3,}$/, mensagem: 'Nome inválido' },
+        {
+            id: 'cpf', validar: (v) => ({
+                valido: validarDigitosCPF(v.replace(/\D/g, '')),
+                mensagem: 'CPF inválido'
+            })
+        },
         { id: 'email', regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, mensagem: 'E-mail inválido' },
         { id: 'telefone', regex: /^\(\d{2}\) \d{4,5}-\d{4}$/, mensagem: 'Telefone inválido' },
         { id: 'cep', regex: /^\d{5}-\d{3}$/, mensagem: 'CEP inválido', erroId: 'cep-erro' },
         { id: 'numero', regex: /^\d+$/, mensagem: 'Número inválido' },
-        { id: 'username', regex: /^[a-zA-Z0-9_.]{4,}$/, mensagem: 'Nome de usuário inválido' },
-        { id: 'senha', validar: validarSenha, mensagem: 'Senha inválida' }
+        { id: 'username', validar: validarUsername },
+        { id: 'senha', validar: validarSenha },
+        {
+            id: 'confirmar_senha',
+            validar: (v) => validarConfirmacaoSenha(document.getElementById('senha')?.value, v)
+        }
     ];
 
-    camposObrigatorios.forEach(({ id, regex, validar, mensagem, erroId }) => {
+    campos.forEach(({ id, regex, validar, mensagem, erroId }) => {
         const campo = document.getElementById(id);
         if (!campo) return;
-        
-        const valido = validar ? 
-            validar(campo.value)?.valido ?? false : 
-            regex.test(campo.value.trim());
-        
-        if (!valido) {
-            const erroElement = document.getElementById(erroId || `${id}__erro`);
-            if (erroElement) {
-                erroElement.textContent = mensagem;
-                erroElement.style.display = 'block';
+
+        let resultado = { valido: false };
+        if (validar) resultado = validar(campo.value);
+        else resultado = { valido: regex.test(campo.value.trim()), mensagem };
+
+        if (!resultado.valido) {
+            const erro = document.getElementById(erroId || `${id}__erro`);
+            if (erro) {
+                erro.textContent = resultado.mensagem || mensagem;
+                erro.style.display = 'block';
             }
             campo.classList.add('invalido');
             formValido = false;
@@ -282,17 +257,29 @@ function validarFormularioCompleto() {
 
     if (!document.querySelector('input[name="trilha"]:checked')) {
         document.getElementById('trilha__erro').style.display = 'block';
-        document.querySelector('.trilha__escolhida').classList.add('invalido');
+        document.querySelector('.trilha__escolhida')?.classList.add('invalido');
         formValido = false;
     }
 
     if (!document.getElementById('declaro')?.checked) {
         document.getElementById('declaro__erro').style.display = 'block';
-        document.querySelector('.checkbox').classList.add('invalido');
+        document.querySelector('.checkbox')?.classList.add('invalido');
         formValido = false;
     }
 
     return formValido;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    configurarMascaras();
+    configurarValidacaoEmTempoReal();
+    configurarEnvioFormulario();
+});
+
+function salvarDadosLocalStorage(dados) {
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    usuarios.push(dados);
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
 }
 
 function configurarEnvioFormulario() {
@@ -301,7 +288,7 @@ function configurarEnvioFormulario() {
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         document.querySelectorAll('.mensagem__erro').forEach(el => el.style.display = 'none');
         document.querySelectorAll('.invalido').forEach(el => el.classList.remove('invalido'));
 
@@ -312,31 +299,33 @@ function configurarEnvioFormulario() {
 
         try {
             const formData = new FormData(form);
-            console.log('Dados do formulário:', Object.fromEntries(formData.entries()));
-            
+            const dados = Object.fromEntries(formData.entries());
+
+            // Salvar dados essenciais no localStorage
+            salvarDadosLocalStorage({
+                nome: dados.nome,
+                username: dados.username,
+                email: dados.email,
+                senha: dados.senha
+            });
+
             const mensagemConfirmacao = document.getElementById('mensagemConfirmacao');
             if (mensagemConfirmacao) {
                 mensagemConfirmacao.classList.add('mostrar');
                 mensagemConfirmacao.scrollIntoView({ behavior: 'smooth' });
             }
         } catch (error) {
-            console.error('Erro no envio:', error);
+            console.error('Erro ao enviar formulário:', error);
             submitBtn.disabled = false;
         }
     });
 
-    const fecharMensagemBtn = document.getElementById('fecharMensagemBtn');
-    if (fecharMensagemBtn) {
-        fecharMensagemBtn.addEventListener('click', () => {
+    const fecharBtn = document.getElementById('fecharMensagemBtn');
+    if (fecharBtn) {
+        fecharBtn.addEventListener('click', () => {
             document.getElementById('mensagemConfirmacao')?.classList.remove('mostrar');
-            form.querySelector('button[type="submit"]').disabled = false;
             form.reset();
+            form.querySelector('button[type="submit"]').disabled = false;
         });
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    configurarMascaras();
-    configurarValidacaoEmTempoReal();
-    configurarEnvioFormulario();
-});
