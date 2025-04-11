@@ -83,7 +83,7 @@
     padding: 0.625rem 1.25rem 1.25rem 0.625rem;
     width: 100%;
     max-width: 40rem; 
-    height: 115.150rem;
+    height: 118rem;
     gap: 1.900rem;
     display: flex;
     flex-direction: column;
@@ -95,17 +95,22 @@
 .inscricao__conteudo__formulario {
     box-sizing: border-box;
     background-color: var(--superficie-primaria);
-    height: 5.625rem;
+    height: 6.625rem;
     width: 27rem;
     padding: 0 0 0 1rem;
+}
+
+.inscricao__conteudo__participante{
+    width: 29rem;
+    height: 24.100rem; 
 }
 
 .inscricao__conteudo__endereco {
     box-sizing: border-box;
     background-color: var(--superficie-primaria);
     flex-direction: column;
-    width: 28rem;
-    height: 14.600rem;
+    width: 29rem;
+    height: 16rem;
 }
 
 .inscricao__endereco__configuracao {
@@ -148,9 +153,15 @@
 }
 
 .id__senha{
+
     width: 15rem;
     height: 7.500rem;
     padding: 1.25rem 0 0 0;
+}
+
+.id__senha .senha,
+.id__senha .senha__confirmação {
+    margin-bottom: 1.1rem;
 }
 
 .termos__condicoes {
@@ -160,7 +171,8 @@
     overflow: visible;
     white-space: normal;
     width: 32rem;
-    height: 5rem;
+    height: 4.5rem;
+    margin: 7rem 0 0 0;
 }
 
 .termos__condicoes label {
@@ -197,7 +209,7 @@
 }
 
 .document__box {
-    width: 570px;
+    width: 28rem;
     height: 160px;
     border: 0.0625rem dashed;
     color: var(--tracado);
@@ -464,4 +476,15 @@
 .form__padrao textarea {
     resize: vertical;
     height: 120px;
+}
+
+.edital {
+    text-align: center;
+    padding: 8rem 2rem;
+    flex: 1;
+    color: var(--text-terciaria);
+}
+
+.edital__icon {
+    font-size: var( --font-size-heading1);
 }
