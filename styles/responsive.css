@@ -1,0 +1,327 @@
+@media (max-width: 1024px) {
+    .conteudo__home {
+        justify-content: center;
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+    .container {
+        flex-direction: column-reverse;
+        align-items: center;
+        padding: 0 1.5rem;
+    }
+
+    .container__imagem {
+        max-width: 18rem;
+    }
+
+    .rodape {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .cabecalho__menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container__imagem {
+        max-width: 14rem;
+    }
+
+    .conteudo__home {
+        padding: 0 1rem;
+    }
+
+    .rodape__logo {
+        max-width: 12rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .inscricao {
+        padding: 1rem;
+    }
+
+    .imagem__inscricao {
+        width: 80%;
+        margin: 1rem auto;
+    }
+
+    .inscricao__conteudo {
+        padding: 1rem;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .inscricao__conteudo__formulario,
+    .inscricao__conteudo__participante,
+    .inscricao__conteudo__endereco,
+    .inscricao__conteudo__trilha,
+    .id__senha,
+    .document__box,
+    .termos__condicoes,
+    .inscricao__conteudo__titulo__secao {
+        width: 100%;
+        height: auto;
+    }
+
+    .inscricao__conteudo__formulario__submit {
+        justify-content: center;
+        margin: 1rem 0 0;
+    }
+
+    .trilha {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .imagem__inscricao .ilustracao {
+        max-width: 100%;
+    }
+
+    .inscricao-btn {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    .trilha__escolhida {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .inscricao__conteudo__titulo__secao {
+        padding-left: 0.5rem;
+        width: 100%;
+    }
+
+    .termos__condicoes {
+        margin-top: 2rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .login__box {
+        position: static;
+        transform: none;
+        margin: 1rem;
+    }
+
+    .form__login {
+        width: 90%; 
+        height: auto; 
+        padding: 1rem;
+        border-radius: 0.75rem;
+    }
+
+    .title__login {
+        font-size: 1.5rem; 
+    }
+
+    .subtitle__login {
+        width: 100%; 
+        margin-left: 0;
+        padding-left: 0;
+        font-size: 1rem; 
+    }
+
+    .form__style {
+        width: 100%; 
+        margin-left: 0; 
+    }
+
+    .input-icon-wrapper {
+        width: 100%;
+    }
+
+    .input-icon-wrapper input {
+        padding-right: 3rem; 
+    }
+
+    .toggle-senha {
+        font-size: 1.25rem; 
+        right: 0.5rem; 
+    }
+
+    .link__login {
+        font-size: 0.9rem; 
+        padding: 0.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form__login {
+        width: 100%; 
+        height: auto;
+        padding: 1rem;
+    }
+
+    .title__login {
+        font-size: 1.25rem; 
+    }
+
+    .subtitle__login {
+        font-size: 0.9rem; 
+        margin-left: 0;
+    }
+
+    .form__style {
+        width: 100%; 
+    }
+
+    .input-icon-wrapper input {
+        padding-right: 3rem; 
+    }
+
+    .toggle-senha {
+        font-size: 1.2rem; 
+        right: 0.5rem;
+    }
+
+    .link__login {
+        font-size: 0.8rem; 
+        padding: 0.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .box__ajuda {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        font-size: var(--font-size-heading4);
+    }
+
+    .form__padrao {
+        width: 90%;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .form__padrao input,
+    .form__padrao select,
+    .form__padrao textarea {
+        width: 100%;
+    }
+
+    .label_ajuda_feedback {
+        width: 100%;
+    }
+
+    .ajuda_feedback_btn {
+        width: 100%;
+        font-size: var(--font-size-heading6);
+    }
+
+    .opcoes_ajuda_feedback {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .box__ajuda {
+        width: 80%;
+    }
+
+    .form__padrao {
+        width: 80%;
+    }
+
+    .form__padrao input,
+    .form__padrao select,
+    .form__padrao textarea {
+        width: 100%;
+    }
+
+    .label_ajuda_feedback {
+        width: 100%;
+    }
+
+    .ajuda_feedback_btn {
+        width: auto;
+        font-size: var(--font-size-heading6);
+    }
+}
+
+@media (min-width: 1024px) {
+    .box__ajuda {
+        width: 36rem;
+    }
+
+    .form__padrao {
+        width: 36rem;
+    }
+
+    .form__padrao input,
+    .form__padrao select,
+    .form__padrao textarea {
+        width: 30rem;
+    }
+
+    .ajuda_feedback_btn {
+        width: auto;
+        font-size: var(--font-size-heading5);
+    }
+}
+
+@media (max-width: 600px) {
+    .box__ajuda {
+        width: 100%;
+        padding: 1rem;
+        font-size: var(--font-size-heading4);
+    }
+
+    .form__padrao {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .form__padrao input,
+    .form__padrao select,
+    .form__padrao textarea {
+        width: 100%;
+    }
+
+    .label_ajuda_feedback {
+        width: 100%;
+    }
+
+    .ajuda_feedback_btn {
+        width: 100%;
+        font-size: var(--font-size-heading6);
+    }
+
+    .opcoes_ajuda_feedback {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .box__ajuda {
+        width: 80%;
+    }
+
+    .form__padrao {
+        width: 80%;
+    }
+
+    .form__padrao input,
+    .form__padrao select,
+    .form__padrao textarea {
+        width: 100%;
+    }
+
+    .label_ajuda_feedback {
+        width: 100%;
+    }
+
+    .ajuda_feedback_btn {
+        width: auto;
+        font-size: var(--font-size-heading6);
+    }
+}
